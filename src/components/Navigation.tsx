@@ -46,8 +46,8 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleContactClick = () => {
-    scrollToSection('contact');
+    const handleContactClick = (path: string) => {
+    window.location.href = path;
     setIsMobileMenuOpen(false);
   };
 
@@ -99,7 +99,7 @@ const Navigation = () => {
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-light-blue-400 transition-all duration-300 group-hover:w-full transform group-hover:scale-110 rounded-full"></span>
             </button>
             <button 
-              onClick={handleContactClick}
+              onClick={()=> handleContactClick('/contact')}
               className="relative text-white hover:text-light-blue-400 transition-colors font-medium text-lg py-2 group"
             >
               Contact Us
@@ -142,7 +142,7 @@ const Navigation = () => {
                     Cohort Program
                   </button>
                   <button 
-                    onClick={handleContactClick}
+                    onClick={()=> handleContactClick('/contact')}
                     className="text-white hover:text-light-blue-400 transition-colors font-medium text-left py-2"
                   >
                     Contact Us
