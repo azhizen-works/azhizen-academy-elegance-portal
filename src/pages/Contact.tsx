@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from '@/firebase';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +16,43 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+
+    try {
+      await addDoc(collection(db, "contactForm"), {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        createdAt: serverTimestamp(),
+      });
+
+      await fetch("http://localhost:5000/api/contact-us", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          FormMessage: formData.message,
+        })
+      })
+
+      alert("Message sent successfully!");
+
+      // Clear form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Something went wrong!");
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -33,13 +68,13 @@ const Contact = () => {
       <nav className="bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            <button 
+            <button
               onClick={() => window.location.href = '/'}
               className="font-serif text-2xl font-bold bg-gradient-to-r from-dark-blue-600 to-light-blue-600 bg-clip-text text-transparent"
             >
               Azhizen Academy
             </button>
-            <Button 
+            <Button
               onClick={() => window.location.href = '/'}
             >
               Back to Home
@@ -112,7 +147,7 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  <Button 
+                  <Button
                     type="submit"
                     size="lg"
                     className="w-full"
