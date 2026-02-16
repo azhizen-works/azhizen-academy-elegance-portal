@@ -6,6 +6,9 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:8080",
+  "https://azhizen-academy-elegance-portal.vercel.app",
+  "https://academy.azhizen.me",
+  "https://academy.azhizen.com"
 ];
 
 

@@ -28,7 +28,7 @@ const Contact = () => {
         createdAt: serverTimestamp(),
       });
 
-      await fetch("http://localhost:5000/api/contact-us", {
+      await fetch("https://azhizen-academy-elegance-portal.onrender.com/api/contact-us", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
