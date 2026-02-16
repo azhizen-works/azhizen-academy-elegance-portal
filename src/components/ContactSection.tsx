@@ -28,7 +28,7 @@ const ContactSection = () => {
         createdAt: serverTimestamp(),
       });
 
-      await fetch("http://localhost:5000/api/get-in-touch", {
+      await fetch("https://azhizen-academy-elegance-portal.onrender.com/api/get-in-touch", {
         method: "POST",
         headers: {"Content-Type" : "application/json"},
         body: JSON.stringify({
