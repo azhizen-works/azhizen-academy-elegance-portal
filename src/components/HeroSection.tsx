@@ -77,7 +77,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative h-[90vh] md:h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
     >
       {/* Slides */}
       <div className="absolute inset-0 w-full h-full">
@@ -104,55 +104,60 @@ const HeroSection = () => {
                 aria-hidden="true"
               />
             )}
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-black/55" />
           </div>
         ))}
       </div>
 
       {/* Content */}
-      <div className="relative z-30 text-center max-w-4xl mx-auto px-6 py-10">
-<h1 className="font-serif text-5xl md:text-7xl font-bold mb-4 text-white text-outline-white">
-  Azhizen <span className="text-cream-100">Academy</span>
-</h1>
+      <div className="relative z-30 flex flex-col items-center text-center w-full max-w-4xl mx-auto px-5 sm:px-8 py-6">
 
+        {/* Academy Title */}
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold mb-3 text-white leading-tight text-outline-white">
+          Azhizen <span className="text-cream-100">Academy</span>
+        </h1>
 
-
-
-
+        {/* Slide Title */}
         <h2
-          className="text-3xl md:text-5xl font-semibold mb-2 text-gold-400 animate-fade-in-up"
+          className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-2 text-gold-400 animate-fade-in-up leading-snug"
           style={{ animationDelay: '0.1s' }}
         >
           {slides[active].title}
         </h2>
+
+        {/* Subtitle */}
         {slides[active].subtitle && (
           <p
-            className="text-lg md:text-2xl text-cream-200 mb-4 animate-fade-in-up"
+            className="text-base sm:text-lg md:text-2xl text-cream-200 mb-3 animate-fade-in-up"
             style={{ animationDelay: '0.15s' }}
           >
             {slides[active].subtitle}
           </p>
         )}
+
+        {/* Description */}
         <p
-          className="text-md md:text-xl text-cream-200 mb-8 max-w-2xl mx-auto animate-fade-in-up"
+          className="text-sm sm:text-base md:text-xl text-cream-200 mb-7 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto animate-fade-in-up leading-relaxed text-center px-2 sm:px-0"
           style={{ animationDelay: '0.2s' }}
         >
           {slides[active].description}
         </p>
+
+        {/* CTA Buttons */}
         <div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full animate-fade-in-up"
           style={{ animationDelay: '0.3s' }}
         >
           <a
             href={slides[active].ctaUrl}
-            className="bg-gold-400 text-black px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 luxury-shadow"
+            className="w-full sm:w-auto bg-gold-400 text-black px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105 luxury-shadow text-center"
           >
             {slides[active].ctaText}
           </a>
           {slides[active].secondaryCtaText && slides[active].secondaryCtaUrl && (
             <a
               href={slides[active].secondaryCtaUrl}
-              className="bg-transparent border-2 border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              className="w-full sm:w-auto bg-transparent border-2 border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-black px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center"
             >
               {slides[active].secondaryCtaText}
             </a>
@@ -163,25 +168,27 @@ const HeroSection = () => {
       {/* Arrows */}
       <button
         aria-label="Previous"
-        className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 p-2 rounded-full transition"
+        className="absolute left-2 sm:left-6 md:left-12 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 p-1.5 sm:p-2 rounded-full transition"
         onClick={prevSlide}
       >
-        <ChevronLeft size={36} className="text-white" />
+        <ChevronLeft size={28} className="text-white sm:hidden" />
+        <ChevronLeft size={36} className="text-white hidden sm:block" />
       </button>
       <button
         aria-label="Next"
-        className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 p-2 rounded-full transition"
+        className="absolute right-2 sm:right-6 md:right-12 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 p-1.5 sm:p-2 rounded-full transition"
         onClick={nextSlide}
       >
-        <ChevronRight size={36} className="text-white" />
+        <ChevronRight size={28} className="text-white sm:hidden" />
+        <ChevronRight size={36} className="text-white hidden sm:block" />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
         {slides.map((_, i) => (
           <button
             key={i}
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-500 ${
               i === active ? 'bg-gold-400 scale-125' : 'bg-cream-400/30'
             }`}
             aria-label={`Go to slide ${i + 1}`}
